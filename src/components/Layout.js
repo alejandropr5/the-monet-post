@@ -1,5 +1,6 @@
 import { Header } from "./Header";
 import { Footer } from "./Footer";
+import TopButton from "./TopButton";
 
 export function Layout({
   navigation,
@@ -11,12 +12,14 @@ export function Layout({
 }) {
   return (
     <div className="text-slate-700">
-      <Header
-        withProfile={withProfile}
-        withDivider={withHeaderDivider}
-        navigation={navigation}
-        settings={settings}
-      />
+      <TopButton>
+        <Header
+          withProfile={withProfile}
+          withDivider={withHeaderDivider}
+          navigation={navigation}
+          settings={settings}
+        />
+      </TopButton>
       <main>{children}</main>
       <Footer withSignUpForm={withSignUpForm} settings={settings} />
     </div>

@@ -11,7 +11,12 @@ module.exports = {
       serif:
         'var(--libre-baskerville), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif',
     },
-    extend: {},
+    extend: {
+      fontFamily: {
+        heading: "'League Spartan', sans-serif",
+        content: "'Montserrat', sans-serif"
+      }
+    },
   },
   plugins: [require("@tailwindcss/aspect-ratio")],
 };

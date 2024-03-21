@@ -6,6 +6,10 @@ import { PrismicNextLink, PrismicNextImage } from "@prismicio/next";
 import { Bounded } from "./Bounded";
 import { Heading } from "./Heading";
 import { HorizontalDivider } from "./HorizontalDivider";
+import ClientImage from "./ClientImage"
+import instagramSVG from "../../public/instagram.svg"
+import twitterSVG from "../../public/twitter.svg"
+import NavText from "./NavText";
 
 const Profile = ({ name, description, profilePicture }) => {
   return (
@@ -47,7 +51,9 @@ const Profile = ({ name, description, profilePicture }) => {
 
 const NavItem = ({ children }) => {
   return (
-    <li className="font-semibold tracking-tight text-slate-800">{children}</li>
+    <li className="font-bold tracking-tight font-heading text-[#322203] uppercase">
+      {children}
+    </li>
   );
 };
 
@@ -57,34 +63,87 @@ export const Header = ({
   navigation,
   settings,
 }) => {
+  const socialMedia = [
+    {
+      imageComponent: instagramSVG,
+      description: "Instagram svg",
+      url: "https://www.instagram.com/themonetpost"
+    },
+    {
+      imageComponent: twitterSVG,
+      description: "Twitter svg",
+      url: "https://x.com/themonetpost"
+    }    
+  ]  
   return (
-    <Bounded as="header">
-      <div className="grid grid-cols-1 justify-items-center gap-20">
-        <nav>
-          <ul className="flex flex-wrap justify-center gap-10">
+    <div
+      as="header"
+      className={`py-3 px-8 bg-[#EBEBEB]
+      ${withDivider ? "border-b-[1px] border-b-[#e2e5ec]" : ""}`}
+    >
+      <div className="flex flex-row items-center">
+        <div className="w-fit">
+          <div className="relative h-16 w-16 overflow-hidden rounded-full">
+            {prismic.isFilled.image(settings.data.profilePicture) && (
+              <PrismicNextImage
+                field={settings.data.profilePicture}
+                fill={true}
+                sizes="100vw"
+                className="object-cover"
+              />
+            )}
+          </div>
+        </div>
+        <nav className="flex flex-row justify-center w-full mr-16">
+          <ul className="flex flex-wrap justify-center items-center gap-20">
             <NavItem>
               <Link href="/">
-                <PrismicText field={navigation.data.homepageLabel} />
+                <NavText>
+                  {prismic.asText(navigation.data.homepageLabel)}
+                </NavText>                
               </Link>
             </NavItem>
-            {navigation.data?.links.map((item) => (
-              <NavItem key={prismic.asText(item.label)}>
-                <PrismicNextLink field={item.link}>
-                  <PrismicText field={item.label} />
-                </PrismicNextLink>
-              </NavItem>
+            {navigation.data?.links.map((item, index) => (
+              <>
+                {index === Math.floor(navigation.data.links.length / 2) && (
+                  <div className="mx-5">
+                    <NavItem key={prismic.asText(settings.data.name)}>
+                      <Link href="/">
+                        <span
+                          className="font-bold tracking-tighter font-heading text-5xl text-[#322203] uppercase"
+                        >
+                          {prismic.asText(settings.data.name)}
+                        </span>
+                      </Link>
+                    </NavItem>
+                  </div>
+                )}
+                <NavItem key={prismic.asText(item.label)}>
+                  <PrismicNextLink field={item.link}>
+                    <NavText>
+                      {prismic.asText(item.label)}
+                    </NavText>
+                  </PrismicNextLink>
+                </NavItem>
+
+              </>
             ))}
           </ul>
         </nav>
-        {withProfile && (
-          <Profile
-            name={settings.data.name}
-            description={settings.data.description}
-            profilePicture={settings.data.profilePicture}
-          />
-        )}
-        {withDivider && <HorizontalDivider />}
+        <nav className="flex flex-row space-x-4">
+          {socialMedia.map(item => 
+            <a
+              key={item.description}
+              className="w-7 h-7"
+              href={item.url}
+              target="_blank"
+            >
+              <ClientImage imageComponent={item.imageComponent} description={item.description} />
+            </a>
+          )}
+        </nav>
       </div>
-    </Bounded>
+        {/* {withDivider && <HorizontalDivider />} */}
+    </div>
   );
 };
