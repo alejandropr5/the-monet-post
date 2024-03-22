@@ -53,12 +53,12 @@ export default async function Index() {
         )}
         <div
           className="absolute inset-0 flex justify-center items-center">
-          <div className="flex flex-col justify-center items-center backdrop-filter backdrop-blur-sm bg-black/50 w-fit h-fit space-y-6 p-4">
-            <h2 className="font-bold tracking-tight font-content text-6xl text-[#EBEBEB] max-w-3xl text-center z-50">
+          <div className="flex flex-col justify-center items-center backdrop-filter backdrop-blur-sm bg-black/50 w-fit h-fit space-y-6 p-4 mx-8">
+            <h2 className="font-bold tracking-tight font-content text-4xl phone:text-5xl md:text-6xl text-[#EBEBEB] max-w-3xl text-center z-50">
               {article.data.meta_title}
             </h2>
             <Link
-              className="bg-[#EBEBEB] px-6 py-3 text-[#a5926b] font-semibold font-content text-sm shadow-lg z-50 relative flex flex-row items-center justify-center"
+              className="bg-[#EBEBEB] px-6 py-3 text-[#a5926b] font-semibold font-content text-xs md:text-sm shadow-lg z-50 relative flex flex-row items-center justify-center"
               href={article.url}
             >
               READ NOW

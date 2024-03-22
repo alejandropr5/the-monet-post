@@ -15,6 +15,10 @@ module.exports = {
       fontFamily: {
         heading: "'League Spartan', sans-serif",
         content: "'Montserrat', sans-serif"
+      },
+      screens: {
+        'phone': '520px',
+        // => @media (min-width: 640px) { ... }
       }
     },
   },

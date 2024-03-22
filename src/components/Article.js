@@ -31,7 +31,7 @@ export function Article({ article }) {
           )}
         </div>
       </PrismicNextLink>
-      <div className="grid grid-cols-1 gap-3 md:col-span-2">
+      <div className="grid grid-cols-1 gap-3 md:col-span-2 font-content">
         <Heading as="h2">
           <PrismicNextLink document={article}>
             <PrismicText field={article.data.title} />
