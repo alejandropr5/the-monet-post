@@ -1,18 +1,15 @@
-import Link from "next/link";
+import { Suspense } from "react";
 import * as prismic from "@prismicio/client";
 import { PrismicText } from "@prismicio/react";
 import { PrismicNextLink, PrismicNextImage } from "@prismicio/next";
 
-import { Bounded } from "./Bounded";
 import { Heading } from "./Heading";
-import { HorizontalDivider } from "./HorizontalDivider";
 import ClientImage from "./ClientImage"
 import instagramSVG from "../../public/instagram.svg"
 import twitterSVG from "../../public/twitter.svg"
-import NavText from "./NavText";
-import NavBar, { NavItem } from "./NavBar"
+import NavBar from "./NavBar"
 import HamburgerMenu from "./HamburgerMenu"
- 
+
 const Profile = ({ name, description, profilePicture }) => {
   return (
     <div className="px-4">
@@ -92,7 +89,7 @@ export const Header = ({
             </div>
           </div>
           <NavBar navigation={navigation} settings={settings} />
-          <nav className="flex flex-row space-x-2 phone:space-x-4">
+          <nav className="flex flex-row space-x-3 phone:space-x-4">
             {socialMedia.map(item =>
               <a
                 key={item.description}
@@ -105,7 +102,6 @@ export const Header = ({
             )}
           </nav>
         </div>
-          {/* {withDivider && <HorizontalDivider />} */}
       </div>
     </>
   );

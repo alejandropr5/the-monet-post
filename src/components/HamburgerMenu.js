@@ -6,19 +6,12 @@ import ClientImage from "./ClientImage"
 import menuSVG from "../../public/menu.svg"
 import closeSVG from "../../public/close.svg"
 import { PrismicNextLink } from "@prismicio/next";
-import { useViewport } from "@/hooks/viewPort";
 
 export default function HamburgerMenu({ navigation }) {
   const [showDropdown, setShowDropdown] = useState(false)
-  const { width } = useViewport()
-  const breakpoint = 1024
-
-  if (width > breakpoint) {
-    return null
-  }
 
   return (
-    <div className="w-full">
+    <div className="w-full lg:hidden">
       <div
         className="flex w-full justify-center items-center bg-[#EBEBEB] hover:bg-[#dddddd] font-semibold font-content cursor-pointer"
         onClick={() => {setShowDropdown(!showDropdown)}}
@@ -32,7 +25,7 @@ export default function HamburgerMenu({ navigation }) {
               description="Menu SVG"
             />
           </div>
-          <span className="text-sm text-[#a5926b] py-4">
+          <span className="text-sm text-[#a5926b] py-3">
             Menu        
           </span>      
         </div>
